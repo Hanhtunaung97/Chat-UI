@@ -1,14 +1,15 @@
 import React from "react";
-import Container from "./components/Container";
-import SideBar from "./components/SideBar";
+import { ChatSection, Container, Header, SideBar } from "./components";
 
 const App = () => {
   return (
-    <div className="center bg-slate-100">
+    <section className="center bg-slate-100">
       <Container>
+        <Header />
         <SideBar />
+        <ChatSection />
       </Container>
-    </div>
+    </section>
   );
 };
 
