@@ -15,6 +15,7 @@ import {
 import useSWR from "swr";
 import { fetchChatUsers } from "../../services/chatGroup";
 import userPhoto from "../../assets/image/userPhoto.png";
+import Loading from "../Loading";
 
 export default function ChatInterface() {
   const [messages, setMessages] = useState([]);
@@ -90,12 +91,7 @@ export default function ChatInterface() {
     <div className="flex flex-col h-screen max-w-2xl mx-auto bg-white rounded-lg">
       {/* Header */}
       {isLoading ? (
-        <div className="h-[500px] flex justify-center items-center">
-          <h1 className=" text-xl font-bold text-red-500 flex items-center">
-            <span className=" text-blue-700">Loading...</span>
-            <span className=" inline-block p-1 w-3 h-3 rounded-full border-4 border-blue-700 border-s-4 border-s-red-700 border-e-4 border-e-red-700  animate-spin"></span>
-          </h1>
-        </div>
+        <Loading />
       ) : (
         <div className="flex items-center justify-between p-3 border-b">
           <div className="flex items-center gap-3">
