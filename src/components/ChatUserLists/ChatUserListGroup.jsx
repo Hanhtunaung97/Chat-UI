@@ -14,7 +14,7 @@ const ChatUserListGroup = () => {
   return (
     <div className="bg-white flex flex-col gap-4 rounded-lg p-4 ">
       <ChatSearchBar />
-      {!isLoading && data.map((el) => <ChatUserList key={el.id} user={el} />)}
+      {!isLoading && data?.map((el) => <ChatUserList key={el.id} user={el} />)}
       <ChatButtonGroup />
     </div>
   );

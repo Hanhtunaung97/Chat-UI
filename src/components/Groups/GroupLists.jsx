@@ -9,7 +9,6 @@ const GroupLists = () => {
     "http://18.143.79.95/api/chatSystem/groups/list",
     fetchLists
   );
-  console.log(data);
   return (
     <div className="bg-white flex flex-col gap-3 rounded-lg p-4 ">
       <div className="flex justify-between items-center">

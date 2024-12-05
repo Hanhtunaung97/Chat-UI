@@ -1,6 +1,7 @@
 import React from "react";
 import ChatUserListGroup from "./ChatUserLists/ChatUserListGroup";
 import GroupLists from "./Groups/GroupLists";
+import ChatInterface from "./Message/ChatInterFace";
 
 const ChatSection = () => {
   return (
@@ -11,7 +12,9 @@ const ChatSection = () => {
             <ChatUserListGroup />
             <GroupLists />
           </div>
-          <div className=" col-span-full gap-4 flex flex-col"></div>
+          <div className=" col-span-2 ">
+            <ChatInterface />
+          </div>
         </div>
       </div>
     </div>
