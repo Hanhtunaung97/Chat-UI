@@ -1,5 +1,4 @@
 import React from "react";
-import { Avatar } from "flowbite-react";
 import {
   HiOutlineHome,
   HiOutlineBuildingOffice2,
@@ -16,7 +15,7 @@ const SideBar = () => {
   return (
     <aside
       id="docs-sidebar"
-      className="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed  h-auto top-2 bottom-0 start-1 z-[60] w-18  text-white    overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 dark:bg-gray-800 dark:border-gray-700"
+      className="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed  h-auto top-2 bottom-0 start-1 z-[60] w-18  text-white    overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100  dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 dark:bg-gray-800 dark:border-gray-700"
     >
       <nav
         className="hs-accordion-group   w-full flex flex-col justify-center gap-10 items-center flex-wrap "
@@ -104,19 +103,14 @@ const SideBar = () => {
         </ul>
         <div className="">
           <div className="w-full flex justify-center items-center flex-col gap-1  ">
-            <Avatar
-              img={userPhoto}
-              rounded
-              status="online"
-              statusPosition="bottom-right"
-              className=" object-contain object-top rounded-full  border border-orange-500"
-            />
-            <span className="text-black text-xs">Natalie</span>
-            {/* <img
+            <div className="relative">
+              <img
                 src={userPhoto}
-                alt="userPhoto"
-                className="h-8 object-contain object-top rounded-full bg-orange-500"
-              /> */}
+                className=" object-contain object-top rounded-full h-10  inline-block border border-orange-500"
+              />
+              <span className="w-2 h-2 bg-green-500 rounded-full absolute -bottom-0.5 right-0 left-0 mx-auto" />
+            </div>
+            <span className="text-black text-xs">Natalie</span>
           </div>
         </div>
       </nav>
