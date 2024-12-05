@@ -20,11 +20,12 @@ export default function ChatInterface() {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const [search, setSearch] = useState("");
+  // fetch user
   const { data, error, isLoading } = useSWR(
     "http://18.143.79.95/api/chatSystem/user/3",
     fetchChatUsers
   );
-
+  // fetch messages
   const fetchMessages = async () => {
     try {
       const res = await fetch(
@@ -37,6 +38,7 @@ export default function ChatInterface() {
       console.error("Error fetching messages:", error);
     }
   };
+  // header search function
   const handleSearchInput = (e) => {
     const chat = e.target.value;
     setSearch(chat);
@@ -48,7 +50,7 @@ export default function ChatInterface() {
   };
   const searchMessage = (chat) => {
     if (!chat.trim()) {
-      setFilteredChats(messages);
+      setMessages(messages);
       return;
     }
     const filtered = messages.filter((el) =>
@@ -57,6 +59,7 @@ export default function ChatInterface() {
     setMessages(filtered);
   };
 
+  // send message
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!inputMessage.trim()) return;
@@ -79,6 +82,7 @@ export default function ChatInterface() {
 
     // fetchMessages();
   };
+  // useEffect fetch messages
   useEffect(() => {
     fetchMessages();
   }, []);
