@@ -23,14 +23,14 @@ export default function ChatInterface() {
   const [search, setSearch] = useState("");
   // fetch user
   const { data, error, isLoading } = useSWR(
-    "http://18.143.79.95/api/chatSystem/user/3",
+    "http://18.143.79.95/api/chatSystem/user/4",
     fetchChatUsers
   );
   // fetch messages
   const fetchMessages = async () => {
     try {
       const res = await fetch(
-        `http://18.143.79.95/api/chatSystem/chatByUserId/3`
+        `http://18.143.79.95/api/chatSystem/chatByUserId/4`
       );
       const fetchedData = await res.json();
       // console.log(fetchedData);
@@ -88,88 +88,94 @@ export default function ChatInterface() {
     fetchMessages();
   }, []);
   return (
-    <div className="flex flex-col h-screen  max-w-2xl mx-auto bg-white rounded-l-lg">
+    <div className="flex flex-col h-svh col-span-full sm:col-span-2  bg-white rounded-l-lg ">
       {/* Header */}
       {isLoading ? (
         <Loading />
       ) : (
-        <div className="flex items-center justify-between p-3 border-b">
-          <div className="flex items-center gap-3">
-            <img
-              src={data?.profileImage}
-              alt="Profile"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <div>
-              <h2 className="font-semibold text-xs">{data?.username}</h2>
-              <p className="text-sm text-neutral-500">{data?.position}</p>
-            </div>
-          </div>
-          <div className="flex justify-center items-center gap-4">
-            <div className="flex items-center justify-end ">
-              <Search className="w-4 h-4 text-neutral-500 " />
-              <input
-                type="search"
-                placeholder="Search"
-                value={search}
-                onChange={handleSearchInput}
-                className="bg-transparent bg-neutral-100 rounded-full border-none outline-none ml-2 text-xs w-auto focus:ring-neutral-300 focus:border-neutral-300"
-              />
-            </div>
-            <button className="p-1 border border-neutral-400 hover:bg-neutral-100 rounded-full">
-              <PhoneCall className="w-4 h-4 text-neutral-500" />
-            </button>
-            <button className="p-1 border border-neutral-400 hover:bg-neutral-100 rounded-full">
-              <Video className="w-4 h-4 text-neutral-500" />
-            </button>
-            <button className="p-1 border border-neutral-400 hover:bg-neutral-100 rounded-full">
-              <MoreVertical className="w-4 h-4 text-neutral-500" />
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Chat Messages */}
-      <div className="flex-1 overflow-auto overscroll-none scrollbar-thin scrollbar-thumb-neutral-200 scrollbar-track-transparent shadow-inset p-4 space-y-4">
-        {messages.map((message) => (
-          <div
-            key={message.id}
-            className={`flex gap-3 ${
-              message.fromUser === data?.id ? "justify-end" : "justify-start"
-            }`}
-          >
-            {message.fromUser !== data?.id && (
+        <>
+          <div className="flex items-center justify-between p-3 border-b">
+            <div className="flex items-center gap-3">
               <img
-                src={userPhoto}
-                alt={userPhoto}
-                className="rounded-full w-8 h-8 object-contain object-top"
+                src={data?.profileImage}
+                alt="Profile"
+                width={40}
+                height={40}
+                className="rounded-full"
               />
-            )}
-            <div
-              className={`max-w-[70%] ${
-                message.fromUser === data?.id
-                  ? "bg-indigo-600 text-white  rounded-2xl p-3"
-                  : " bg-white rounded-2xl p-3 border"
-              }`}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <span className="font-semibold text-xs">
-                  {message.fromUser === data?.id ? data?.username : "Other"}
-                </span>
-                <span
-                  className={`${
-                    message.fromUser === data?.id
-                      ? " text-white"
-                      : "text-neutral-400"
-                  } text-xs`}
-                >
-                  {new Date(message.timestamp).toLocaleTimeString("en-GB")}
-                </span>
+              <div>
+                <h2 className="font-semibold text-[10px] sm:text-xs ">
+                  {data?.username}
+                </h2>
+                <p className="text-[10px] sm:text-xs  lg:text-sm text-neutral-500">
+                  {data?.position}
+                </p>
               </div>
-              <p className="text-sm">{message.message}</p>
-              {/* {message.attachments?.images && (
+            </div>
+            <div className="flex justify-center items-center gap-2 xl:gap-4">
+              <div className="flex items-center justify-end ">
+                <Search className="w-4 h-4 text-neutral-500 " />
+                <input
+                  type="search"
+                  placeholder="Search"
+                  value={search}
+                  onChange={handleSearchInput}
+                  className="ps-2 p-1 lg:p-2 bg-neutral-100 rounded-full border-none outline-none ml-1 sm:ml-2 text-xs sm:w-auto focus:ring-neutral-300 focus:border-neutral-300 w-[150px]"
+                />
+              </div>
+              <button className="p-1 border hidden sm:inline-block border-neutral-400 hover:bg-neutral-100 rounded-full">
+                <PhoneCall className="w-4 h-4 text-neutral-500" />
+              </button>
+              <button className="p-1 border hidden sm:inline-block border-neutral-400 hover:bg-neutral-100 rounded-full">
+                <Video className="w-4 h-4 text-neutral-500" />
+              </button>
+              <button className="p-1 border hidden xl:inline-block border-neutral-400 hover:bg-neutral-100 rounded-full">
+                <MoreVertical className="w-4 h-4 text-neutral-500" />
+              </button>
+            </div>
+          </div>
+
+          {/* Chat Messages */}
+          <div className="flex-1 overflow-y-auto overscroll-none scrollbar-thin scrollbar-thumb-neutral-200 scrollbar-track-transparent  p-4 space-y-4">
+            {messages.map((message) => (
+              <div
+                key={message.id}
+                className={`flex gap-3 ${
+                  message.fromUser === data?.id
+                    ? "justify-end"
+                    : "justify-start"
+                }`}
+              >
+                {message.fromUser !== data?.id && (
+                  <img
+                    src={userPhoto}
+                    alt={userPhoto}
+                    className="rounded-full w-8 h-8 object-contain object-top"
+                  />
+                )}
+                <div
+                  className={`max-w-[70%] ${
+                    message.fromUser === data?.id
+                      ? "bg-indigo-600 text-white  rounded-2xl p-3"
+                      : " bg-white rounded-2xl p-3 border"
+                  }`}
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-semibold text-xs">
+                      {message.fromUser === data?.id ? data?.username : "Other"}
+                    </span>
+                    <span
+                      className={`${
+                        message.fromUser === data?.id
+                          ? " text-white"
+                          : "text-neutral-400"
+                      } text-xs`}
+                    >
+                      {new Date(message.timestamp).toLocaleTimeString("en-GB")}
+                    </span>
+                  </div>
+                  <p className="text-sm">{message.message}</p>
+                  {/* {message.attachments?.images && (
                 <div className="mt-2 grid grid-cols-2 gap-2">
                   {message.attachments.images.map((img, index) => (
                     <Image
@@ -191,75 +197,77 @@ export default function ChatInterface() {
                   {message.attachments.link}
                 </a>
               )} */}
-            </div>
+                </div>
 
-            {message.fromUser === data?.id && (
-              <img
-                src={data?.profileImage}
-                alt={data?.id}
-                className="rounded-full w-8 h-8 object-contain object-top"
+                {message.fromUser === data?.id && (
+                  <img
+                    src={data?.profileImage}
+                    alt={data?.id}
+                    className="rounded-full w-8 h-8 object-contain object-top"
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Message Input */}
+          <form onSubmit={handleSendMessage} className="border-t p-4">
+            <div className="flex items-center gap-2 bg-neutral-100 rounded-full px-4 py-2">
+              <input
+                type="text"
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                placeholder="Type a message here..."
+                className="flex-1 bg-transparent border-none outline-none text-xs focus:ring-neutral-100 focus:border-neutral-100"
               />
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* Message Input */}
-      <form onSubmit={handleSendMessage} className="border-t p-4">
-        <div className="flex items-center gap-2 bg-neutral-100 rounded-full px-4 py-2">
-          <input
-            type="text"
-            value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
-            placeholder="Type a message here..."
-            className="flex-1 bg-transparent border-none outline-none text-xs focus:ring-neutral-100 focus:border-neutral-100"
-          />
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              className="p-1 hover:bg-neutral-200 rounded-full"
-            >
-              <AtSign className="w-4 h-4 text-neutral-500" />
-            </button>
-            <button
-              type="button"
-              className="p-1 hover:bg-neutral-200 rounded-full"
-            >
-              <Bold className="w-4 h-4 text-neutral-500" />
-            </button>
-            <button
-              type="button"
-              className="p-1 hover:bg-neutral-200 rounded-full"
-            >
-              <Smile className="w-4 h-4 text-neutral-500" />
-            </button>
-            <button
-              type="button"
-              className="p-1 hover:bg-neutral-200 rounded-full"
-            >
-              <Share2Icon className="w-4 h-4 text-neutral-500" />
-            </button>
-            <button
-              type="button"
-              className="p-1 hover:bg-neutral-200 rounded-full"
-            >
-              <ImageIcon className="w-4 h-4 text-neutral-500" />
-            </button>
-            <button
-              type="button"
-              className="p-1 hover:bg-neutral-200 rounded-full"
-            >
-              <Paperclip className="w-4 h-4 text-neutral-500" />
-            </button>
-            <button
-              type="submit"
-              className="p-1 bg-rose-500 hover:bg-rose-600 rounded-full"
-            >
-              <Send className="w-4 h-4 text-white" />
-            </button>
-          </div>
-        </div>
-      </form>
+              <div className="flex items-center gap-1  md:gap-2">
+                <button
+                  type="button"
+                  className="p-1 hidden sm:block hover:bg-neutral-200 rounded-full"
+                >
+                  <AtSign className="w-4 h-4 text-neutral-500" />
+                </button>
+                <button
+                  type="button"
+                  className="p-1 hidden sm:block hover:bg-neutral-200 rounded-full"
+                >
+                  <Bold className="w-4 h-4 text-neutral-500" />
+                </button>
+                <button
+                  type="button"
+                  className="p-1 hidden sm:block hover:bg-neutral-200 rounded-full"
+                >
+                  <Smile className="w-4 h-4 text-neutral-500" />
+                </button>
+                <button
+                  type="button"
+                  className="p-1 hidden sm:block hover:bg-neutral-200 rounded-full"
+                >
+                  <Share2Icon className="w-4 h-4 text-neutral-500" />
+                </button>
+                <button
+                  type="button"
+                  className="p-1 hover:bg-neutral-200 rounded-full"
+                >
+                  <ImageIcon className="w-4 h-4 text-neutral-500" />
+                </button>
+                <button
+                  type="button"
+                  className="p-1 hover:bg-neutral-200 rounded-full"
+                >
+                  <Paperclip className="w-4 h-4 text-neutral-500" />
+                </button>
+                <button
+                  type="submit"
+                  className="p-1 bg-rose-500 hover:bg-rose-600 rounded-full"
+                >
+                  <Send className="w-4 h-4 text-white" />
+                </button>
+              </div>
+            </div>
+          </form>
+        </>
+      )}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { ChatSection, Container, Header, SideBar } from "./components";
 
 const App = () => {
   return (
-    <section className="center bg-slate-100">
+    <section className="center bg-slate-100  overflow-hidden">
       <Container>
         <Header />
         <SideBar />

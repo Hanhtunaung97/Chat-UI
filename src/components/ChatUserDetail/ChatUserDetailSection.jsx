@@ -14,11 +14,10 @@ import Avatar from "react-avatar";
 import img1 from "../../assets/image/img1.jpg";
 import img2 from "../../assets/image/img2.jpg";
 import img3 from "../../assets/image/img3.jpg";
-import Loading from "../Loading";
 
 const ChatUserDetailSection = () => {
   const { data, error, isLoading } = useSWR(
-    `http://18.143.79.95/api/chatSystem/user/3`,
+    `http://18.143.79.95/api/chatSystem/user/4`,
     fetchChatUsers
   );
   //   console.log(data);
@@ -27,22 +26,24 @@ const ChatUserDetailSection = () => {
     <></>
   ) : (
     <>
-      <div className="w-full h-screen  rounded-lg bg-white">
+      <div className="h-full w-full hidden sm:block  col-span-full sm:col-span-1 rounded-lg bg-white ">
         <div className=" w-full h-full flex flex-col">
           <div className=" ">
             <div className="relative">
               <img
                 src={data?.profileImage}
-                className=" object-cover object-center rounded-lg  h-60 w-full inline-block"
+                className=" object-cover object-center rounded-lg  sm:h-52 lg:h-60 w-full inline-block"
               />
-              <div className="absolute   -bottom-10 flex flex-col justify-center gap-1 items-center bg-white p-2 w-2/3 left-0 right-0 mx-auto rounded-lg ">
+              <div className="absolute   -bottom-10 flex flex-col justify-center gap-1 lg:gap-2 items-center bg-white p-2 w-2/3 left-0 right-0 mx-auto rounded-lg ">
                 <h3 className="text-xs text-neural-500 font-semibold font-headings">
                   {data?.username}
                 </h3>
-                <p className="text-sm text-neutral-500">{data?.position}</p>
+                <p className="text-xs xl:text-sm text-neutral-500 text-center">
+                  {data?.position}
+                </p>
                 <div className="flex gap-2 items-start">
                   <LuMapPin className="w-4 h-4 text-neutral-500" />
-                  <span className="text-sm text-neural-500 font-semibold font-headings">
+                  <span className="text-xs xl:text-sm  text-neural-500 font-semibold font-headings">
                     {data?.address}
                   </span>
                 </div>
@@ -108,7 +109,7 @@ const ChatUserDetailSection = () => {
                 <div className="relative ">
                   <img
                     src={data?.profileImage}
-                    className=" object-cover object-center rounded-full  w-8  h-8 border border-neutral-200  inline-block  "
+                    className=" object-cover object-center rounded-full   w-8 border border-neutral-200  inline-block  "
                   />
                   <span className="w-4 h-4 bg-neutral-200 text-[8px]  flex justify-center items-center rounded-full absolute top-0 bottom-0 -right-2 font-semibold  my-auto ">
                     +<span>2</span>
@@ -129,17 +130,17 @@ const ChatUserDetailSection = () => {
                 <img
                   src={img1}
                   alt="img1"
-                  className=" h-16 object-contain object-center rounded-lg"
+                  className="  sm:w-14 md:w-16 xl:w-20 object-contain object-center rounded-lg"
                 />
                 <img
                   src={img2}
                   alt="img2"
-                  className=" h-16 object-contain object-center rounded-lg"
+                  className=" sm:w-14 md:w-16 xl:w-20 object-contain object-center rounded-lg"
                 />
                 <img
                   src={img3}
                   alt="img3"
-                  className=" h-16 object-contain object-center rounded-lg"
+                  className=" sm:w-14 md:w-16 xl:w-20 object-contain object-center rounded-lg"
                 />
               </div>
             </div>
